@@ -1,0 +1,59 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+div {
+    text-align : center;
+}
+
+.logo {
+    /*background-color:red;*/
+    float:left;
+    width:40%;
+    height:100px;
+}
+
+.search {
+    /*background-color : black;*/
+    margin-left : 20px;
+    float : right;
+    width : 40%;
+    height : 100px;
+}
+
+.clear {
+    clear:both;
+}
+
+.left {
+    width : 20%;
+    float : left;
+    background-color:black;
+}
+
+.middle {
+    width : 50%;
+    height : 400px;
+    float : left;
+    background-color:red;
+}
+
+.right {
+    width : 20%;
+    height : 400px;
+    float : left;
+    background-color : green;
+}
+
+div.navigate {
+    text-align : center;
+}
+
+
+div.leftdiv {
+    border:2px solid;
+    border-radius:25px;
+    margin:5px;
+    -moz-border-radius:25px;
+}

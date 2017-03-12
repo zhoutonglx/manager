@@ -77,52 +77,6 @@
             </ul>
         </div>
         <div class="col-md-6" style="overflow:hidden">
-            <script>
-                $(function(){
-                     var wrap=document.getElementById('wrap'),
-                     pic=document.getElementById('pic').getElementsByTagName("li"),
-                     list=document.getElementById('list').getElementsByTagName('li'),
-                     index=0,
-                     timer=null;
-
-
-                     timer = setInterval(autoPlay, 5000);
-
-
-                     wrap.onmouseover = function () {
-                         clearInterval(timer);
-                     }
-
-
-                     wrap.onmouseout = function () {
-                        timer = setInterval(autoPlay, 5000);
-                     }
-
-                     for (var i = 0; i < list.length; i++) {
-                        list[i].onmouseover = function () {
-                            clearInterval(timer);
-                            index = this.innerText - 1;
-                             changePic(index);
-                        };
-                     };
-
-                     function autoPlay () {
-                        if (++index >= pic.length) index = 0;
-                        changePic(index);
-                     }
-
-
-                     function changePic (curIndex) {
-                        for (var i = 0; i < pic.length; ++i) {
-                            pic[i].style.display = "none";
-                            list[i].className = "";
-                        }
-                        pic[curIndex].style.display = "block";
-                        list[curIndex].className = "on";
-                     }
-                });
-
-            </script>
             <div class="wrap" id="wrap">
                 <ul id="pic">
                     <li><img src="/static/img/lunbo.jpg" alt=""/></li>
@@ -197,7 +151,85 @@
         </div>
     </div>
 </div>
+
+<div class="theme-popover">
+   <div class="theme-poptit">
+     <a href="javascript:;" title="关闭" class="theme-poptit close">×</a>
+     <h3>请登录</h3>
+   </div>
+
+   <div class="theme-popbod dform">
+      <form class="theme-signin" name="loginform" action="" method="post">
+        <ol>
+           <li><h4>登录</h4></li>
+           <li><strong>用户名：</strong><input class="ipt form-control" type="text"  /></li>
+           <li><strong>密码：</strong><input class="ipt form-control" type="password"/></li>
+           <li><input class="btn btn-primary" type="submit" name="submit" value=" 登 录 " /></li>
+        </ol>
+      </form>
+   </div>
+</div>
+<div class="theme-popover-mask"></div>
+
 </body>
 <script>
+$(function() {
+   enroll();
+   $('.theme-login').click(function(){
+        $('.theme-popover-mask').fadeIn(100);
+        $('.theme-popover').slideDown(300);
+  });
+  $('.theme-poptit .close').click(function(){
+        $('.theme-popover-mask').fadeOut(300);
+        $('.theme-popover').slideUp(300);
+  });
+})
+
+
+function enroll() {
+
+   var wrap=document.getElementById('wrap'),
+    pic=document.getElementById('pic').getElementsByTagName("li"),
+    list=document.getElementById('list').getElementsByTagName('li'),
+    index=0,
+    timer=null;
+
+
+    timer = setInterval(autoPlay, 5000);
+
+
+    wrap.onmouseover = function () {
+        clearInterval(timer);
+    }
+
+
+    wrap.onmouseout = function () {
+       timer = setInterval(autoPlay, 5000);
+    }
+
+    for (var i = 0; i < list.length; i++) {
+       list[i].onmouseover = function () {
+           clearInterval(timer);
+           index = this.innerText - 1;
+            changePic(index);
+       };
+    };
+
+    function autoPlay () {
+       if (++index >= pic.length) index = 0;
+       changePic(index);
+    }
+
+
+    function changePic (curIndex) {
+       for (var i = 0; i < pic.length; ++i) {
+           pic[i].style.display = "none";
+           list[i].className = "";
+       }
+       pic[curIndex].style.display = "block";
+       list[curIndex].className = "on";
+    }
+}
+
 </script>
 </html>

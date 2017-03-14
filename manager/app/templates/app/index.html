@@ -12,40 +12,7 @@
 <body>
 {% include 'app/nav.html' %}
 <div class="container">
-    <div class="col-md-6">
-        <a href=""><img src="/static/img/logo3.jpg"></a>
-    </div>
-    <div class="col-md-6">
-            <ul class="nav navbar-nav nav-tabs">
-                <li class="active"><a href="#">综合</a></li>
-                <li><a href="#">图片</a></li>
-                <li><a href="#">问答</a></li>
-                <li><a href="#">视频</a></li>
-                <li><a href="#">附件</a></li>
-            </ul>
-        <ul style="padding:0">
-            <form class="form-horizontal" action="" method="post">
-                <div class="form-group">
-                    <div class="col-sm-7" style="margin:0;padding-right:0">
-                        <input type="text" class="form-control"/>
-                    </div>
-                    <div class="col-sm-1" style="padding:0">
-                        <input type="submit" class="btn" value="搜索" />
-                    </div>
-                </div>
-            </form>
-        </ul>
-    </div>
-    <div class="clear"></div>
-    <div class="row" style="overflow:auto;background-color:#00FF00">
-        <ul class="nav col-md-offset-2">
-            <li class="col-md-2"><a href="#"><div style="text-align:center">首页</div></a></li>
-            <li class="col-md-2"><a href="#"><div class="navigate">信息公开</div></a></li>
-            <li class="col-md-2"><a href="#"><div class="navigate">交通出行</div></a></li>
-            <li class="col-md-2"><a href="#"><div class="navigate">警民互动</div></a></li>
-            <li class="col-md-2"><a href="#"><div class="navigate">安全宣传</div></a></li>
-        </ul>
-    </div>
+    {% include 'app/brand.html' %}
     <div class="row">
         <div class="col-md-3">
             <ul class="nav nav-pills nav-stacked">
@@ -80,7 +47,7 @@
             <div class="wrap" id="wrap">
                 <ul id="pic">
                     <li><img src="/static/img/lunbo.jpg" alt=""/></li>
-                    <!--<li><img src="/static/img/tired.gif" alt=""/></li>-->
+                    <li><img src="/static/img/lunbo2.jpg" alt=""/></li>
                 </ul>
                 <ol id="list">
                     <li class="on">1</li>
@@ -159,15 +126,17 @@
    </div>
 
    <div class="theme-popbod dform">
-      <form class="theme-signin" name="loginform" action="" method="post">
+      <form class="theme-signin" name="loginform" action="/signin/" method="post">
+          {% csrf_token %}
         <ol>
            <li><h4>登录</h4></li>
-           <li><strong>用户名：</strong><input class="ipt form-control" type="text"  /></li>
-           <li><strong>密码：</strong><input class="ipt form-control" type="password"/></li>
-           <li><input class="btn btn-primary" type="submit" name="submit" value=" 登 录 " /></li>
+           <li><strong>用户名：</strong><input name='username' id='name' class="ipt form-control" type="text"  required/></li>
+           <li><strong>密码：</strong><input name='password' id='password' class="ipt form-control" type="password" required/></li>
+            <li><input type="submit" class="btn" value="登 录"></li>
         </ol>
       </form>
    </div>
+    <div id="message"></div>
 </div>
 <div class="theme-popover-mask"></div>
 
@@ -182,8 +151,8 @@ $(function() {
   $('.theme-poptit .close').click(function(){
         $('.theme-popover-mask').fadeOut(300);
         $('.theme-popover').slideUp(300);
-  });
-})
+   });
+});
 
 
 function enroll() {
@@ -195,7 +164,7 @@ function enroll() {
     timer=null;
 
 
-    timer = setInterval(autoPlay, 5000);
+    timer = setInterval(autoPlay, 3000);
 
 
     wrap.onmouseover = function () {
@@ -204,7 +173,7 @@ function enroll() {
 
 
     wrap.onmouseout = function () {
-       timer = setInterval(autoPlay, 5000);
+       timer = setInterval(autoPlay, 3000);
     }
 
     for (var i = 0; i < list.length; i++) {
@@ -229,6 +198,25 @@ function enroll() {
        pic[curIndex].style.display = "block";
        list[curIndex].className = "on";
     }
+}
+
+function login()
+{
+    $.ajax({
+        url : '/signin/',
+        dataType : 'json',
+        type : 'post',
+        data : {
+            username : $("#username").val(),
+            password : $("#password").val()
+        },
+        success : function() {
+            window.reload();
+        },
+        error : function(message) {
+            $("#message").html(message)
+        }
+    });
 }
 
 </script>

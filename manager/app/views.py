@@ -5,11 +5,15 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from app import models
 # Create your views here.
+
+
 def index(request):
     return render(request, 'app/index.html')
 
 
 def test(request):
+    if 'file' in request.FILES:
+        return HttpResponse("hello world")
     return render(request, 'app/test.html')
 
 
@@ -24,10 +28,12 @@ def signin(request):
     # else:
     #     JsonResponse({'status':False, 'message' : "用户名或密码错误"})
 
+
 def logout(request):
     auth.logout(request)
     return render(request, 'app/index.html')
 
+
 def supervision(request):
     supervisor = models.Supervision.objects.all()
-    return render(request, 'app/supervision.html' , {'data' : supervisor})
+    return render(request, 'app/supervision.html', {'data': supervisor})

@@ -33,3 +33,11 @@
             <li class="col-md-2"><a href="#"><div class="navigate">安全宣传</div></a></li>
         </ul>
     </div>
+   <script>
+        $('ul.nav > li').click(function (e) {
+            e.preventDefault();
+            $('ul.nav > li').removeClass('active');
+            $(this).addClass('active');
+        });
+
+   </script>
